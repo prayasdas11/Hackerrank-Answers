@@ -1,0 +1,56 @@
+import java.io.*;
+import java.math.*;
+import java.security.*;
+import java.text.*;
+import java.util.*;
+import java.util.concurrent.*;
+import java.util.regex.*;
+
+class Solution 
+{
+
+    // Complete the hourglassSum function below.
+    static int hourglassSum(int[][] arr)
+    {
+        int rows = arr.length;
+        int coloumns = arr[0].length;
+        int max_sum = Integer.MIN_VALUE;
+        for(int i = 0; i < rows - 2;i++)
+        {
+            for (int j = 0; j < coloumns - 2; j++)
+            {
+                int current_sum=arr[i][j]+arr[i][j+1]+arr[i][j+2]+arr[i+1][j+1]+arr[i+2][j]+arr[i+2][j+1]+arr[i+2][j+2];
+                max_sum = Math.max(max_sum, current_sum);
+            }
+        }
+        return max_sum;
+    }
+
+    private static final Scanner scanner = new Scanner(System.in);
+
+    public static void main(String[] args) throws IOException
+    {
+        int size = 6;
+        int[][] arr = new int[size][size];
+
+        for (int i = 0; i < size; i++)
+        {
+            for (int j = 0; j < size; j++)
+            {
+                arr[i][j] = scanner.nextInt();
+            }
+        }
+        for (int i = 0; i < size; i++)
+        {
+            for (int j = 0; j < size; j++)
+            {
+                System.out.print(arr[i][j] + " ");
+            }
+            System.out.println();
+        }
+
+        int result = hourglassSum(arr);
+        System.out.println(result);
+        scanner.close();
+    }
+}
